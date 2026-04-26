@@ -51,12 +51,12 @@ final class OrderCancellation {
 			$new_items[ $key ] = $label;
 
 			if ( 'orders' === $key ) {
-				$new_items[ self::ENDPOINT ] = esc_html__( 'Stornierte Bestellungen', 'doctorcura' );
+				$new_items[ self::ENDPOINT ] = esc_html__( 'Stornierte Bestellungen', 'doctorcura-core' );
 			}
 		}
 
 		if ( ! isset( $new_items[ self::ENDPOINT ] ) ) {
-			$new_items[ self::ENDPOINT ] = esc_html__( 'Stornierte Bestellungen', 'doctorcura' );
+			$new_items[ self::ENDPOINT ] = esc_html__( 'Stornierte Bestellungen', 'doctorcura-core' );
 		}
 
 		return $new_items;
@@ -123,7 +123,7 @@ final class OrderCancellation {
 
 		if ( ! $order instanceof WC_Order ) {
 			$this->add_notice_and_redirect(
-				esc_html__( 'Bestellung nicht gefunden.', 'doctorcura' ),
+				esc_html__( 'Bestellung nicht gefunden.', 'doctorcura-core' ),
 				'error',
 				wc_get_page_permalink( 'myaccount' )
 			);
@@ -131,7 +131,7 @@ final class OrderCancellation {
 
 		if ( ! wp_verify_nonce( $nonce, 'dc_cancel_order_' . $order_id ) ) {
 			$this->add_notice_and_redirect(
-				esc_html__( 'Ungültiger Sicherheits-Token.', 'doctorcura' ),
+				esc_html__( 'Ungültiger Sicherheits-Token.', 'doctorcura-core' ),
 				'error',
 				wc_get_page_permalink( 'myaccount' )
 			);
@@ -139,7 +139,7 @@ final class OrderCancellation {
 
 		if ( $order->get_order_key() !== $order_key ) {
 			$this->add_notice_and_redirect(
-				esc_html__( 'Ungültiger Bestellungsschlüssel.', 'doctorcura' ),
+				esc_html__( 'Ungültiger Bestellungsschlüssel.', 'doctorcura-core' ),
 				'error',
 				wc_get_page_permalink( 'myaccount' )
 			);
@@ -147,7 +147,7 @@ final class OrderCancellation {
 
 		if ( ! $this->is_cancellable( $order ) ) {
 			$this->add_notice_and_redirect(
-				esc_html__( 'Diese Bestellung kann nicht mehr storniert werden. Die 1-stündige Stornierungsfrist ist abgelaufen.', 'doctorcura' ),
+				esc_html__( 'Diese Bestellung kann nicht mehr storniert werden. Die 1-stündige Stornierungsfrist ist abgelaufen.', 'doctorcura-core' ),
 				'error',
 				$order->get_view_order_url()
 			);
@@ -155,7 +155,7 @@ final class OrderCancellation {
 
 		$order->update_status(
 			'cancelled',
-			esc_html__( 'Vom Kunden innerhalb der 1-stündigen Stornierungsfrist storniert.', 'doctorcura' )
+			esc_html__( 'Vom Kunden innerhalb der 1-stündigen Stornierungsfrist storniert.', 'doctorcura-core' )
 		);
 
 		$order->update_meta_data( self::META_KEY, current_time( 'mysql' ) );
@@ -177,7 +177,7 @@ final class OrderCancellation {
 
 	public function render_cancelled_orders_endpoint(): void {
 		if ( ! is_user_logged_in() ) {
-			echo '<div class="woocommerce-info">' . esc_html__( 'Bitte melden Sie sich an, um Ihre stornierten Bestellungen zu sehen.', 'doctorcura' ) . '</div>';
+			echo '<div class="woocommerce-info">' . esc_html__( 'Bitte melden Sie sich an, um Ihre stornierten Bestellungen zu sehen.', 'doctorcura-core' ) . '</div>';
 			return;
 		}
 
@@ -185,12 +185,12 @@ final class OrderCancellation {
 
 		$orders = $this->get_customer_cancelled_orders();
 
-		echo '<h2>' . esc_html__( 'Stornierte Bestellungen', 'doctorcura' ) . '</h2>';
-		echo '<p>' . esc_html__( 'Hier finden Sie alle stornierten Bestellungen in Ihrem Kundenkonto.', 'doctorcura' ) . '</p>';
+		echo '<h2>' . esc_html__( 'Stornierte Bestellungen', 'doctorcura-core' ) . '</h2>';
+		echo '<p>' . esc_html__( 'Hier finden Sie alle stornierten Bestellungen in Ihrem Kundenkonto.', 'doctorcura-core' ) . '</p>';
 
 		if ( empty( $orders ) ) {
 			echo '<div class="woocommerce-info">';
-			echo esc_html__( 'Noch keine stornierten Bestellungen vorhanden.', 'doctorcura' );
+			echo esc_html__( 'Noch keine stornierten Bestellungen vorhanden.', 'doctorcura-core' );
 			echo '</div>';
 			return;
 		}
@@ -198,12 +198,12 @@ final class OrderCancellation {
 		echo '<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">';
 		echo '<thead>';
 		echo '<tr>';
-		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-number"><span class="nobr">' . esc_html__( 'Bestellung', 'doctorcura' ) . '</span></th>';
-		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date"><span class="nobr">' . esc_html__( 'Datum', 'doctorcura' ) . '</span></th>';
-		echo '<th class="woocommerce-orders-table__header"><span class="nobr">' . esc_html__( 'Produkte', 'doctorcura' ) . '</span></th>';
+		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-number"><span class="nobr">' . esc_html__( 'Bestellung', 'doctorcura-core' ) . '</span></th>';
+		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date"><span class="nobr">' . esc_html__( 'Datum', 'doctorcura-core' ) . '</span></th>';
+		echo '<th class="woocommerce-orders-table__header"><span class="nobr">' . esc_html__( 'Produkte', 'doctorcura-core' ) . '</span></th>';
 		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status"><span class="nobr">' . esc_html__( 'Status', 'woocommerce' ) . '</span></th>';
-		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total"><span class="nobr">' . esc_html__( 'Gesamt', 'doctorcura' ) . '</span></th>';
-		echo '<th class="woocommerce-orders-table__header"><span class="nobr">' . esc_html__( 'Storniert am', 'doctorcura' ) . '</span></th>';
+		echo '<th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total"><span class="nobr">' . esc_html__( 'Gesamt', 'doctorcura-core' ) . '</span></th>';
+		echo '<th class="woocommerce-orders-table__header"><span class="nobr">' . esc_html__( 'Storniert am', 'doctorcura-core' ) . '</span></th>';
 		echo '</tr>';
 		echo '</thead>';
 		echo '<tbody>';
@@ -236,17 +236,17 @@ final class OrderCancellation {
 
 			echo '<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-cancelled order">';
 
-			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-number" data-title="' . esc_attr__( 'Bestellung', 'doctorcura' ) . '">';
+			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-number" data-title="' . esc_attr__( 'Bestellung', 'doctorcura-core' ) . '">';
 			echo '<a href="' . esc_url( $order->get_view_order_url() ) . '">#' . esc_html( $order->get_order_number() ) . '</a>';
 			echo '</td>';
 
-			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="' . esc_attr__( 'Datum', 'doctorcura' ) . '">';
+			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="' . esc_attr__( 'Datum', 'doctorcura-core' ) . '">';
 			echo '<time datetime="' . esc_attr( $order->get_date_created() ? $order->get_date_created()->date( 'c' ) : '' ) . '">';
 			echo esc_html( wc_format_datetime( $order->get_date_created() ) );
 			echo '</time>';
 			echo '</td>';
 
-			echo '<td class="woocommerce-orders-table__cell" data-title="' . esc_attr__( 'Produkte', 'doctorcura' ) . '">';
+			echo '<td class="woocommerce-orders-table__cell" data-title="' . esc_attr__( 'Produkte', 'doctorcura-core' ) . '">';
 			echo wp_kses_post( $product_list );
 			echo '</td>';
 
@@ -254,11 +254,11 @@ final class OrderCancellation {
 			echo esc_html( wc_get_order_status_name( $order->get_status() ) );
 			echo '</td>';
 
-			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="' . esc_attr__( 'Gesamt', 'doctorcura' ) . '">';
+			echo '<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="' . esc_attr__( 'Gesamt', 'doctorcura-core' ) . '">';
 			echo wp_kses_post( $order->get_formatted_order_total() );
 			echo '</td>';
 
-			echo '<td class="woocommerce-orders-table__cell" data-title="' . esc_attr__( 'Storniert am', 'doctorcura' ) . '">';
+			echo '<td class="woocommerce-orders-table__cell" data-title="' . esc_attr__( 'Storniert am', 'doctorcura-core' ) . '">';
 			echo esc_html( $cancelled_on );
 			echo '</td>';
 
@@ -330,10 +330,10 @@ final class OrderCancellation {
 
 		$message = $order_nr
 			? sprintf(
-				esc_html__( 'Ihre Bestellung #%s wurde erfolgreich storniert.', 'doctorcura' ),
+				esc_html__( 'Ihre Bestellung #%s wurde erfolgreich storniert.', 'doctorcura-core' ),
 				esc_html( $order_nr )
 			)
-			: esc_html__( 'Ihre Bestellung wurde erfolgreich storniert.', 'doctorcura' );
+			: esc_html__( 'Ihre Bestellung wurde erfolgreich storniert.', 'doctorcura-core' );
 
 		echo '<div class="woocommerce-notices-wrapper">';
 		echo '<div class="woocommerce-message" role="alert">';
@@ -353,7 +353,7 @@ final class OrderCancellation {
 		$order_number = $order->get_order_number();
 		$account_url  = wc_get_account_endpoint_url( self::ENDPOINT );
 		$subject      = sprintf(
-			esc_html__( 'Bestellung #%s storniert', 'doctorcura' ),
+			esc_html__( 'Bestellung #%s storniert', 'doctorcura-core' ),
 			$order_number
 		);
 
@@ -378,18 +378,18 @@ final class OrderCancellation {
 		$message .= '<tr>';
 
 		$message .= '<td valign="top" width="33.33%" style="width:33.33%;padding:0 10px;text-align:left;color:#ffffff;">';
-		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Status', 'doctorcura' ) . '</div>';
-		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.35;color:#ffffff;font-weight:700;margin:0;">' . esc_html__( 'Bestellung storniert', 'doctorcura' ) . '</div>';
+		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Status', 'doctorcura-core' ) . '</div>';
+		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.35;color:#ffffff;font-weight:700;margin:0;">' . esc_html__( 'Bestellung storniert', 'doctorcura-core' ) . '</div>';
 		$message .= '</td>';
 
 		$message .= '<td valign="top" width="33.33%" style="width:33.33%;padding:0 10px;text-align:left;color:#ffffff;">';
-		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Bestellung', 'doctorcura' ) . '</div>';
+		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Bestellung', 'doctorcura-core' ) . '</div>';
 		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.35;color:#ffffff;font-weight:700;margin:0;">#' . esc_html( $order_number ) . '</div>';
 		$message .= '</td>';
 
 		$message .= '<td valign="top" width="33.33%" style="width:33.33%;padding:0 10px;text-align:left;color:#ffffff;">';
-		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Konto', 'doctorcura' ) . '</div>';
-		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.35;color:#ffffff;font-weight:700;margin:0;">' . esc_html__( 'Bestellübersicht', 'doctorcura' ) . '</div>';
+		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#ffffff;font-weight:700;margin:0 0 8px 0;">' . esc_html__( 'Konto', 'doctorcura-core' ) . '</div>';
+		$message .= '<div style="font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.35;color:#ffffff;font-weight:700;margin:0;">' . esc_html__( 'Bestellübersicht', 'doctorcura-core' ) . '</div>';
 		$message .= '</td>';
 
 		$message .= '</tr>';
@@ -401,14 +401,14 @@ final class OrderCancellation {
 		$message .= '<tr><td style="padding:32px 30px 20px 30px;">';
 
 		$message .= $this->render_email_language_block(
-			esc_html__( 'Hallo,', 'doctorcura' ),
-			esc_html__( 'Ihre Bestellung wurde erfolgreich storniert. Für diese Bestellung werden keine weiteren Schritte durchgeführt.', 'doctorcura' )
+			esc_html__( 'Hallo,', 'doctorcura-core' ),
+			esc_html__( 'Ihre Bestellung wurde erfolgreich storniert. Für diese Bestellung werden keine weiteren Schritte durchgeführt.', 'doctorcura-core' )
 		);
 
 		$message .= '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:20px 0;background:#f8f9fa;border:1px solid #e5e7eb;border-radius:8px;">';
 		$message .= '<tr><td style="padding:18px 20px;">';
 		$message .= $this->render_email_language_block(
-			esc_html__( 'Bestellnummer', 'doctorcura' ),
+			esc_html__( 'Bestellnummer', 'doctorcura-core' ),
 			'#' . $order_number,
 			false
 		);
@@ -416,7 +416,7 @@ final class OrderCancellation {
 		$message .= '</table>';
 
 		$message .= $this->render_email_language_block(
-			esc_html__( 'Sie können Ihre stornierten Bestellungen jederzeit in Ihrem Kundenkonto einsehen.', 'doctorcura' ),
+			esc_html__( 'Sie können Ihre stornierten Bestellungen jederzeit in Ihrem Kundenkonto einsehen.', 'doctorcura-core' ),
 			'',
 			false
 		);
@@ -424,14 +424,14 @@ final class OrderCancellation {
 		$message .= '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 28px 0;">';
 		$message .= '<tr><td align="center" style="border-radius:8px;background:#0560FF;">';
 		$message .= '<a href="' . esc_url( $account_url ) . '" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;line-height:1.8;color:#ffffff;text-decoration:none;border-radius:8px;">';
-		$message .= esc_html__( 'Stornierte Bestellungen ansehen', 'doctorcura' );
+		$message .= esc_html__( 'Stornierte Bestellungen ansehen', 'doctorcura-core' );
 		$message .= '</a>';
 		$message .= '</td></tr>';
 		$message .= '</table>';
 
 		$message .= '<div style="padding:16px 18px;background:#fff8e1;border-left:4px solid #f0b429;border-radius:6px;margin:0 0 24px 0;">';
 		$message .= $this->render_email_language_block(
-			esc_html__( 'Falls Sie Fragen haben, kontaktieren Sie bitte unseren Kundenservice.', 'doctorcura' ),
+			esc_html__( 'Falls Sie Fragen haben, kontaktieren Sie bitte unseren Kundenservice.', 'doctorcura-core' ),
 			'',
 			false
 		);
@@ -439,7 +439,7 @@ final class OrderCancellation {
 
 		$message .= '<div style="font-size:15px;line-height:1.8;color:#333333;">';
 		$message .= $this->render_email_language_block(
-			esc_html__( 'Mit freundlichen Grüßen,', 'doctorcura' ),
+			esc_html__( 'Mit freundlichen Grüßen,', 'doctorcura-core' ),
 			$site_name
 		);
 		$message .= '</div>';
@@ -448,7 +448,7 @@ final class OrderCancellation {
 
 		$message .= '<tr>';
 		$message .= '<td style="padding:18px 30px;background:#f8f9fa;border-top:1px solid #e5e7eb;text-align:left;">';
-		$message .= '<div style="font-size:12px;line-height:1.8;color:#6b7280;">' . esc_html( $site_name . ' — ' . esc_html__( 'Diese E-Mail wurde automatisch versendet.', 'doctorcura' ) ) . '</div>';
+		$message .= '<div style="font-size:12px;line-height:1.8;color:#6b7280;">' . esc_html( $site_name . ' — ' . esc_html__( 'Diese E-Mail wurde automatisch versendet.', 'doctorcura-core' ) ) . '</div>';
 		$message .= '</td>';
 		$message .= '</tr>';
 
@@ -518,9 +518,9 @@ final class OrderCancellation {
 		);
 
 		echo '<div class="dc-admin-cancel-notice">';
-		echo '<p class="dc-admin-cancel-notice__title">' . esc_html__( 'Hinweis', 'doctorcura' ) . '</p>';
-		echo '<p class="dc-admin-cancel-notice__text">' . esc_html__( 'Diese Bestellung wurde vom Kunden innerhalb des 1-stündigen Zeitfensters storniert.', 'doctorcura' ) . '</p>';
-		echo '<div class="dc-admin-cancel-notice__meta"><strong>' . esc_html__( 'Storniert am', 'doctorcura' ) . ':</strong> ' . esc_html( $date_string ) . '</div>';
+		echo '<p class="dc-admin-cancel-notice__title">' . esc_html__( 'Hinweis', 'doctorcura-core' ) . '</p>';
+		echo '<p class="dc-admin-cancel-notice__text">' . esc_html__( 'Diese Bestellung wurde vom Kunden innerhalb des 1-stündigen Zeitfensters storniert.', 'doctorcura-core' ) . '</p>';
+		echo '<div class="dc-admin-cancel-notice__meta"><strong>' . esc_html__( 'Storniert am', 'doctorcura-core' ) . ':</strong> ' . esc_html( $date_string ) . '</div>';
 		echo '</div>';
 	}
 

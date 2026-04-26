@@ -198,7 +198,9 @@ final class Doctorcura_Request_Form {
             $this->redirect_with_status('error');
         }
 
-        if (!wp_verify_nonce((string) $_POST[self::NONCE_NAME], self::NONCE_ACTION)) {
+        $nonce = sanitize_text_field(wp_unslash((string) $_POST[self::NONCE_NAME]));
+
+        if (!wp_verify_nonce($nonce, self::NONCE_ACTION)) {
             $this->redirect_with_status('error');
         }
 

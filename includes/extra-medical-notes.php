@@ -1,9 +1,15 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Class MedicalOrderNotes
  * Beheert medische beoordelingen door artsen en apothekers voor WooCommerce orders.
  */
+use Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController;
+
 final class MedicalOrderNotes {
 
 	private const META_PREFIX = '_dc_medical_';
@@ -26,17 +32,17 @@ final class MedicalOrderNotes {
 	private function get_status_config(): array {
 		return [
 			'cancel' => [
-				'label' => __( 'Annuleren', 'doctorcura' ),
+				'label' => __( 'Annuleren', 'doctorcura-core' ),
 				'slug'  => 'cancelled',
 				'color' => '#d63638',
 			],
 			'processing' => [
-				'label' => __( 'In behandeling', 'doctorcura' ),
+				'label' => __( 'In behandeling', 'doctorcura-core' ),
 				'slug'  => 'processing',
 				'color' => '#dba617',
 			],
 			'completed' => [
-				'label' => __( 'Afgerond', 'doctorcura' ),
+				'label' => __( 'Afgerond', 'doctorcura-core' ),
 				'slug'  => 'completed',
 				'color' => '#00a32a',
 			],
@@ -65,7 +71,7 @@ final class MedicalOrderNotes {
 
 		add_meta_box(
 			'dc_medical_notes_box',
-			__( 'Medische beoordeling', 'doctorcura' ),
+			__( 'Medische beoordeling', 'doctorcura-core' ),
 			[ $this, 'render_metabox_html' ],
 			$screen,
 			'normal',
@@ -83,8 +89,8 @@ final class MedicalOrderNotes {
 		wp_nonce_field( 'dc_medical_action', 'dc_medical_nonce' );
 
 		$roles = [
-			'dokter'    => __( 'Arts', 'doctorcura' ),
-			'apotheker' => __( 'Apotheker', 'doctorcura' ),
+			'dokter'    => __( 'Arts', 'doctorcura-core' ),
+			'apotheker' => __( 'Apotheker', 'doctorcura-core' ),
 		];
 
 		$statuses = $this->get_status_config();
@@ -131,7 +137,7 @@ final class MedicalOrderNotes {
 					<label><?php echo esc_html( $label ); ?></label>
 
 					<select name="dc_med[<?php echo esc_attr( $key ); ?>][status]">
-						<option value=""><?php esc_html_e( '-- Status selecteren --', 'doctorcura' ); ?></option>
+						<option value=""><?php esc_html_e( '-- Status selecteren --', 'doctorcura-core' ); ?></option>
 						<?php foreach ( $statuses as $status_key => $status ) : ?>
 							<option
 								value="<?php echo esc_attr( $status_key ); ?>"
@@ -144,7 +150,7 @@ final class MedicalOrderNotes {
 
 					<textarea
 						name="dc_med[<?php echo esc_attr( $key ); ?>][note]"
-						placeholder="<?php echo esc_attr__( 'Medische toelichting...', 'doctorcura' ); ?>"
+						placeholder="<?php echo esc_attr__( 'Medische toelichting...', 'doctorcura-core' ); ?>"
 					><?php echo esc_textarea( (string) $order->get_meta( self::META_PREFIX . $key . '_note' ) ); ?></textarea>
 				</div>
 			<?php endforeach; ?>
@@ -195,7 +201,7 @@ final class MedicalOrderNotes {
 		if ( 'cancel' === $doc_status || 'cancel' === $apo_status ) {
 			$order->set_status(
 				$config['cancel']['slug'],
-				__( 'Geannuleerd na medische beoordeling.', 'doctorcura' )
+				__( 'Geannuleerd na medische beoordeling.', 'doctorcura-core' )
 			);
 			return;
 		}
@@ -205,7 +211,7 @@ final class MedicalOrderNotes {
 		if ( isset( $config[ $final_choice ] ) ) {
 			$order->set_status(
 				$config[ $final_choice ]['slug'],
-				__( 'Status bijgewerkt via medische beoordeling.', 'doctorcura' )
+				__( 'Status bijgewerkt via medische beoordeling.', 'doctorcura-core' )
 			);
 		}
 	}
@@ -223,11 +229,11 @@ final class MedicalOrderNotes {
 		}
 
 		echo '<div style="margin:20px 0;padding:15px;border:1px solid #eee;border-radius:8px;background-color:#fcfcfc;">';
-		echo '<h3 style="margin-top:0;color:#222;">' . esc_html__( 'Uw medische beoordeling', 'doctorcura' ) . '</h3>';
+		echo '<h3 style="margin-top:0;color:#222;">' . esc_html__( 'Uw medische beoordeling', 'doctorcura-core' ) . '</h3>';
 
 		$role_labels = [
-			'dokter'    => __( 'Arts', 'doctorcura' ),
-			'apotheker' => __( 'Apotheker', 'doctorcura' ),
+			'dokter'    => __( 'Arts', 'doctorcura-core' ),
+			'apotheker' => __( 'Apotheker', 'doctorcura-core' ),
 		];
 
 		$config = $this->get_status_config();
@@ -259,7 +265,7 @@ final class MedicalOrderNotes {
 			$updated_columns[ $key ] = $label;
 
 			if ( 'order_status' === $key ) {
-				$updated_columns['medical_review'] = __( 'Medisch', 'doctorcura' );
+				$updated_columns['medical_review'] = __( 'Medisch', 'doctorcura-core' );
 			}
 		}
 
