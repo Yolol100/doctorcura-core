@@ -108,9 +108,9 @@ final class Locale {
                 'direct_link'            => 'Direct link:',
                 'email_footer'           => 'Kind regards,',
                 'email_intro'            => 'This email contains English, German and French instructions.',
-                'cancelled_label'        => 'Storniert',
-                'view_order_label'       => 'Bestellung %s ansehen',
-                'view_order_fallback'    => 'Bestellung ansehen',
+                'cancelled_label'        => 'Cancelled',
+                'view_order_label'       => 'View order %s',
+                'view_order_fallback'    => 'View order',
             ],
             'de_DE' => [
                 'verify_subject'         => 'E-Mail bestätigen',
@@ -138,9 +138,9 @@ final class Locale {
                 'direct_link'            => 'Lien direct :',
                 'email_footer'           => 'Cordialement,',
                 'email_intro'            => 'Cet e-mail contient des instructions en anglais, allemand et français.',
-                'cancelled_label'        => 'Storniert',
-                'view_order_label'       => 'Bestellung %s ansehen',
-                'view_order_fallback'    => 'Bestellung ansehen',
+                'cancelled_label'        => 'Annulée',
+                'view_order_label'       => 'Voir la commande %s',
+                'view_order_fallback'    => 'Voir la commande',
             ],
         ];
     }
