@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DoctorCura Core
  * Description: Core DoctorCura account, auth, checkout, order workflow, cancellation, and medical request features.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Requires at least: 6.4
  * Requires PHP: 8.1
  * Author: OpenAI
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'DCAF_VERSION' ) ) {
-    define( 'DCAF_VERSION', '1.0.4' );
+    define( 'DCAF_VERSION', '1.0.5' );
 }
 
 if ( ! defined( 'DCAF_FILE' ) ) {
@@ -41,7 +41,7 @@ require_once DCAF_PATH . 'includes/class-auth-flow.php';
 require_once DCAF_PATH . 'includes/class-account-ui.php';
 require_once DCAF_PATH . 'includes/class-plugin.php';
 // AI-PATCH: Skip loading legacy modules when the same snippet/class is already active.
-if ( ! class_exists( 'DoctorCura\Checkout\CheckoutHandler', false ) ) {
+if ( ! class_exists( 'DoctorCura\\Checkout\\CheckoutHandler', false ) ) {
     require_once DCAF_PATH . 'includes/extra-checkout.php';
 }
 if ( ! class_exists( 'MedicalOrderNotes', false ) ) {
@@ -50,7 +50,7 @@ if ( ! class_exists( 'MedicalOrderNotes', false ) ) {
 if ( ! class_exists( 'Doctorcura_Request_Form', false ) ) {
     require_once DCAF_PATH . 'includes/extra-request-form.php';
 }
-if ( ! class_exists( 'DoctorCura\OrderManagement\OrderCancellation', false ) ) {
+if ( ! class_exists( 'DoctorCura\\OrderManagement\\OrderCancellation', false ) ) {
     require_once DCAF_PATH . 'includes/extra-order-cancellation.php';
 }
 
