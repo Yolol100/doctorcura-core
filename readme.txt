@@ -3,7 +3,7 @@ Contributors: openai
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: woocommerce, account, checkout, medical
@@ -24,6 +24,10 @@ DoctorCura Core bundelt:
 3. Controleer WooCommerce en permalinks
 
 == Changelog ==
+= 1.0.5 =
+* Engelse en Franse accountlabels gebruiken niet langer Duitse fallbackteksten
+* Locale-afhankelijke orderstatus- en orderlinkteksten gecorrigeerd
+
 = 1.0.4 =
 * Rewrite lifecycle verbeterd voor cancelled-orders endpoint
 * Text domain loading gecorrigeerd
