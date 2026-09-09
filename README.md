@@ -28,8 +28,10 @@ De plugins hebben afzonderlijke versies en releasepakketten. Ze worden niet same
 | --- | --- |
 | WordPress | 6.4 of nieuwer; getest tot 6.8 |
 | PHP | 8.1 of nieuwer |
-| Huidige versie | 1.0.7 |
-| Combinatie | Test Core 1.0.7 samen met UI 1.2.6 op staging voordat beide naar productie gaan |
+| Huidige versie | 1.0.8 |
+| Combinatie | Test Core 1.0.8 samen met UI 1.2.7 op staging voordat beide naar productie gaan |
+
+Core 1.0.8 voorkomt activatiefouten wanneer een oudere Core-kopie of gemigreerde Code Snippet dezelfde DoctorCura-symbolen al heeft geladen. In dat scenario wordt alleen de nieuwe loginprivacylaag toegevoegd en worden oude lifecycle-hooks niet opnieuw gestart.
 
 ## Installatie
 
