@@ -28,8 +28,8 @@ De plugins hebben afzonderlijke versies en releasepakketten. Ze worden niet same
 | --- | --- |
 | WordPress | 6.4 of nieuwer; getest tot 6.8 |
 | PHP | 8.1 of nieuwer |
-| Huidige versie | 1.0.5 |
-| Combinatie | Test Core 1.0.5 samen met UI 1.2.4 op staging voordat beide naar productie gaan |
+| Huidige versie | 1.0.7 |
+| Combinatie | Test Core 1.0.7 samen met UI 1.2.6 op staging voordat beide naar productie gaan |
 
 ## Installatie
 
