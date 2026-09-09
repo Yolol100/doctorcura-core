@@ -40,6 +40,18 @@ final class Login_Privacy {
             return $message;
         }
 
-        return esc_html( Locale::t( 'login_failed_generic' ) );
+        $generic = Locale::t( 'login_failed_generic' );
+
+        // If an older Core copy already owns Locale, it may not yet contain
+        // the privacy translation key. Keep the public message generic anyway.
+        if ( 'login_failed_generic' === $generic ) {
+            $generic = match ( Locale::get() ) {
+                'de_DE' => 'Anmeldung fehlgeschlagen. Bitte prüfe deine Anmeldedaten und versuche es erneut.',
+                'fr_FR' => 'Échec de la connexion. Vérifiez vos informations de connexion et réessayez.',
+                default => 'Login failed. Please check your login details and try again.',
+            };
+        }
+
+        return esc_html( $generic );
     }
 }
