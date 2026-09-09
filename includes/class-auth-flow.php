@@ -25,6 +25,7 @@ final class Auth_Flow {
 
         add_action( 'woocommerce_created_customer', [ __CLASS__, 'handle_customer_created' ], 10 );
         add_action( 'wp_loaded', [ __CLASS__, 'redirect_after_register_submit' ], 20 );
+        add_action( 'wp_loaded', [ __CLASS__, 'normalize_lost_password_response' ], 30 );
         add_action( 'template_redirect', [ __CLASS__, 'handle_verification_link' ], 5 );
         add_filter( 'wp_authenticate_user', [ __CLASS__, 'block_login_if_not_verified' ], 30 );
         add_action( 'wp', [ __CLASS__, 'render_verification_notices' ] );
@@ -84,6 +85,49 @@ final class Auth_Flow {
             wp_safe_redirect( Mailer::verification_url() );
             exit;
         }
+    }
+
+    /**
+     * Keep the public lost-password response identical when WooCommerce does not
+     * find an account or rejects a reset request. Successful requests already
+     * redirect and exit in WooCommerce at wp_loaded priority 20.
+     */
+    public static function normalize_lost_password_response(): void {
+        if ( ! isset( $_POST['wc_reset_password'], $_POST['user_login'] ) ) {
+            return;
+        }
+
+        $nonce_value = '';
+
+        if ( isset( $_REQUEST['woocommerce-lost-password-nonce'] ) ) {
+            $nonce_value = sanitize_text_field( wp_unslash( (string) $_REQUEST['woocommerce-lost-password-nonce'] ) );
+        } elseif ( isset( $_REQUEST['_wpnonce'] ) ) {
+            $nonce_value = sanitize_text_field( wp_unslash( (string) $_REQUEST['_wpnonce'] ) );
+        }
+
+        if ( ! wp_verify_nonce( $nonce_value, 'lost_password' ) ) {
+            return;
+        }
+
+        $login = trim( sanitize_text_field( wp_unslash( (string) $_POST['user_login'] ) ) );
+
+        // Keep the normal required-field validation for an empty submission.
+        if ( '' === $login ) {
+            return;
+        }
+
+        // If execution reaches priority 30, WooCommerce did not complete the
+        // reset. Do not expose whether that was caused by account existence,
+        // reset permissions, or another account-specific validation result.
+        wc_clear_notices();
+        wp_safe_redirect(
+            add_query_arg(
+                'reset-link-sent',
+                'true',
+                wc_get_account_endpoint_url( 'lost-password' )
+            )
+        );
+        exit;
     }
 
     public static function handle_verification_link(): void {
