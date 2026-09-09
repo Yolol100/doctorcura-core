@@ -18,6 +18,7 @@ final class Plugin {
         Mailer::hooks();
         Auth_Flow::hooks();
         Account_UI::hooks();
+        Login_Privacy::hooks();
     }
 
     public static function load_textdomain(): void {
