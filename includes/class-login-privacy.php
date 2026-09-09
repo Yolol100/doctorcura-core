@@ -18,11 +18,7 @@ final class Login_Privacy {
             return $message;
         }
 
-        if ( ! function_exists( 'is_account_page' ) || ! is_account_page() ) {
-            return $message;
-        }
-
-        if ( empty( $_POST['login'] ) ) {
+        if ( empty( $_POST['login'] ) || empty( $_POST['woocommerce-login-nonce'] ) ) {
             return $message;
         }
 
