@@ -28,12 +28,15 @@ De plugins hebben afzonderlijke versies en releasepakketten. Ze worden niet same
 | --- | --- |
 | WordPress | 6.4 of nieuwer; getest tot 6.8 |
 | PHP | 8.1 of nieuwer |
-| Huidige versie | 1.0.6 |
-| Combinatie | Test Core 1.0.6 samen met UI 1.3.2 op staging voordat beide naar productie gaan |
+| Huidige versie | 1.0.7 |
+| Combinatie | Test Core 1.0.7 samen met UI 1.3.2 op staging voordat beide naar productie gaan |
 
-## Belangrijk in 1.0.6
+## Belangrijk in 1.0.7
 
-- Lost-passwordverzoeken voor bestaande en onbekende accounts gebruiken dezelfde publieke bevestigingsflow om account-enumeratie te beperken.
+- Lost-passwordverzoeken voor bestaande en onbekende accounts eindigen op dezelfde WooCommerce-pagina.
+- De bevestigingsmelding zegt expliciet dat DoctorCura om veiligheidsredenen niet bevestigt of een account of e-mailadres bestaat.
+- De medische checkout bevat direct onder de bestaande waarheidsverklaring een tweede verplichte bevestiging over de voorschrijfbeslissing en de risico’s van onjuiste, misleidende of onvolledige informatie.
+- Beide laatste medische bevestigingen worden op de WooCommerce-bestelling opgeslagen.
 - Lege invoer en ongeldige nonce blijven normale validatiefouten.
 
 ## Installatie
