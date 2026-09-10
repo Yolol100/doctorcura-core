@@ -1,0 +1,46 @@
+name: One-time DoctorCura contact data correction
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-contact-data-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace legacy contact data and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          f='includes/extra-request-form.php'
+          python3 - "$f" <<'PY'
+          import pathlib,sys
+          p=pathlib.Path(sys.argv[1]); s=p.read_text(encoding='utf-8')
+          replacements={
+            'href="tel:0855055433"':'href="tel:+31855055433"',
+            '085 505 5433':'+31 85 505 54 33',
+            'Keizersgracht 241, 1016 EA, Amsterdam, Niederlande':'Veldbloemlaan 93, 3452CK Vleuten, The Netherlands',
+          }
+          for old,new in replacements.items(): s=s.replace(old,new)
+          legacy=['tel:0855055433','085 505 5433','Keizersgracht 241','1016 EA']
+          if any(x in s for x in legacy): raise SystemExit('Legacy contact value remains')
+          for x in ['tel:+31855055433','+31 85 505 54 33','Veldbloemlaan 93','3452CK Vleuten, The Netherlands']:
+              if x not in s: raise SystemExit('Expected contact value missing: '+x)
+          p.write_text(s,encoding='utf-8')
+          PY
+          php -l "$f"
+          if git diff --quiet -- "$f"; then echo 'NO_CHANGE'; exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$f"
+          git commit -m 'fix: update DoctorCura phone and address'
+          git push origin HEAD:main
