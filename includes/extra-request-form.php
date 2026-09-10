@@ -283,8 +283,8 @@ final class Doctorcura_Request_Form {
                     <span style="font-size: 11px; color: #5f6368; text-transform: uppercase; font-weight: bold; display: block;">
                         Telefon
                     </span>
-                    <a href="tel:0855055433" style="font-size: 13px; color: #0560FF; text-decoration: none;">
-                        085 505 5433
+                    <a href="tel:+31855055433" style="font-size: 13px; color: #0560FF; text-decoration: none;">
+                        +31 85 505 54 33
                     </a>
                 </td>
             </tr>
@@ -295,7 +295,7 @@ final class Doctorcura_Request_Form {
                         Adresse
                     </span>
                     <span style="font-size: 13px; color: #000000;">
-                        Keizersgracht 241, 1016 EA, Amsterdam, Niederlande
+                        Veldbloemlaan 93, 3452CK Vleuten, The Netherlands
                     </span>
                 </td>
             </tr>
