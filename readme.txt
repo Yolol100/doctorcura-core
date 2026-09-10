@@ -3,7 +3,7 @@ Contributors: openai
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: woocommerce, account, checkout, medical
@@ -24,6 +24,11 @@ DoctorCura Core bundelt:
 3. Controleer WooCommerce en permalinks
 
 == Changelog ==
+= 1.0.7 =
+* Lost-password confirmations stay on the same WooCommerce page and always use a generic anti-enumeration notice.
+* Added a required prescribing-decision acknowledgement directly after the final medical questionnaire confirmation.
+* Both final medical confirmations are stored on the WooCommerce order.
+
 = 1.0.6 =
 * Lost-password requests now use the same public confirmation flow for existing and unknown accounts to reduce account enumeration
 
