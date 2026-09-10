@@ -3,7 +3,7 @@ Contributors: openai
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: woocommerce, account, checkout, medical
@@ -24,6 +24,12 @@ DoctorCura Core bundelt:
 3. Controleer WooCommerce en permalinks
 
 == Changelog ==
+= 1.0.8 =
+* Generieke WooCommerce-loginfouten voorkomen dat accountbestaan via de loginmelding kan worden afgeleid.
+* Loginprivacy is alleen actief na een geldige WooCommerce-login-nonce.
+* Pluginloader is beter bestand tegen oudere DoctorCura Core-kopieën en gemigreerde Code Snippets.
+* Behoudt de privacy-safe lost-passwordflow en verplichte medische voorschrijfbevestiging uit 1.0.7.
+
 = 1.0.7 =
 * Lost-password confirmations stay on the same WooCommerce page and always use a generic anti-enumeration notice.
 * Added a required prescribing-decision acknowledgement directly after the final medical questionnaire confirmation.
