@@ -1,0 +1,28 @@
+name: Package DoctorCura Core main
+
+on:
+  push:
+    paths:
+      - '.github/workflows/package-main-download.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax check
+        run: find . -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n1 php -l
+      - name: Build plugin ZIP
+        run: |
+          mkdir -p build/doctorcura-core
+          rsync -a --exclude='.git' --exclude='.github' --exclude='build' ./ build/doctorcura-core/
+          cd build
+          zip -qr doctorcura-core-1.0.8.zip doctorcura-core
+      - uses: actions/upload-artifact@v4
+        with:
+          name: doctorcura-core-1.0.8
+          path: build/doctorcura-core-1.0.8.zip
+          if-no-files-found: error
