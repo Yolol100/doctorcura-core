@@ -3,7 +3,7 @@ Contributors: openai
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: woocommerce, account, checkout, medical
@@ -24,6 +24,11 @@ DoctorCura Core bundelt:
 3. Controleer WooCommerce en permalinks
 
 == Changelog ==
+= 1.0.11 =
+* Fatale checkoutfout opgelost bij de extra voorschrijfbevestiging.
+* WooCommerce wordt nu expliciet gevraagd om het veld als HTML-string terug te geven voordat het wordt aangepast.
+* Extra typecontrole voorkomt dat een toekomstige null-return opnieuw een TypeError kan veroorzaken.
+
 = 1.0.10 =
 * De Duitse voorschrijfbevestiging blijft de brontekst van de checkout.
 * Het bevestigingsveld is expliciet vertaalbaar gemaakt voor GTranslate.
