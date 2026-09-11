@@ -3,7 +3,7 @@ Contributors: openai
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: woocommerce, account, checkout, medical
@@ -24,6 +24,11 @@ DoctorCura Core bundelt:
 3. Controleer WooCommerce en permalinks
 
 == Changelog ==
+= 1.0.10 =
+* De Duitse voorschrijfbevestiging blijft de brontekst van de checkout.
+* Het bevestigingsveld is expliciet vertaalbaar gemaakt voor GTranslate.
+* Een gerichte GTranslate-fallback volgt taalwissels en WooCommerce checkout-updates voor Duits, Engels en Frans zonder bestaande GTranslate-vertalingen te overschrijven.
+
 = 1.0.9 =
 * De extra medische voorschrijfbevestiging en bijbehorende validatiemelding zijn nu Duits.
 * De zichtbare teksten blijven via de bestaande WordPress-i18n-output zonder notranslate-markering geschikt voor vertaling door GTranslate.
