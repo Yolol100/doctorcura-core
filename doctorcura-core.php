@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DoctorCura Core
  * Description: Core DoctorCura account, auth, checkout, order workflow, cancellation, and medical request features.
- * Version: 1.0.8
+ * Version: 1.0.9
  * Requires at least: 6.4
  * Requires PHP: 8.1
  * Author: OpenAI
@@ -24,7 +24,7 @@ $dcaf_this_url  = plugin_dir_url( __FILE__ );
 $dcaf_primary_instance = ! defined( 'DCAF_FILE' );
 
 if ( ! defined( 'DCAF_VERSION' ) ) {
-    define( 'DCAF_VERSION', '1.0.8' );
+    define( 'DCAF_VERSION', '1.0.9' );
 }
 
 if ( ! defined( 'DCAF_FILE' ) ) {
