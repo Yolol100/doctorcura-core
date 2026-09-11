@@ -137,10 +137,18 @@ final class Security_Consent {
                 'type'     => 'checkbox',
                 'label'    => self::prescription_acknowledgement_label(),
                 'required' => true,
+                'return'   => true,
                 'class'    => [ 'form-row-wide', 'wa-confirmation-row', 'wa-padding-both-1rem' ],
             ],
             $checked
         );
+
+        // WooCommerce echoes fields by default and may therefore return null.
+        // `return => true` requests the HTML string; keep this guard as a safe
+        // fallback so a WooCommerce change can never cause a TypeError here.
+        if ( ! is_string( $acknowledgement ) ) {
+            $acknowledgement = '';
+        }
 
         // Explicitly keep the field translatable. The data attribute documents
         // that German is the canonical source language without blocking GTranslate.
