@@ -86,7 +86,7 @@ final class Security_Consent {
             [
                 'type'     => 'checkbox',
                 'label'    => __(
-                    'I confirm that I understand that, if the doctor issues a prescription, the decision will be based on the information I provide through the validated medical questionnaire. I understand that providing false, misleading, or incomplete information may be dangerous to my health and may prevent the physician from conducting an accurate and appropriate medical assessment.',
+                    'Ich bestätige, dass ich verstehe, dass die Entscheidung über die Ausstellung eines Rezepts auf den Angaben beruht, die ich im validierten medizinischen Fragebogen mache. Mir ist bewusst, dass falsche, irreführende oder unvollständige Angaben meine Gesundheit gefährden und den Arzt daran hindern können, eine genaue und angemessene medizinische Beurteilung vorzunehmen.',
                     'doctorcura-core'
                 ),
                 'required' => true,
@@ -104,7 +104,7 @@ final class Security_Consent {
         }
 
         $message = __(
-            'Please confirm that you understand how the medical questionnaire is used for a prescribing decision and the risks of providing false, misleading, or incomplete information.',
+            'Bitte bestätigen Sie, dass Sie verstehen, wie der medizinische Fragebogen für die Entscheidung über eine mögliche Verschreibung verwendet wird und welche Risiken falsche, irreführende oder unvollständige Angaben mit sich bringen.',
             'doctorcura-core'
         );
 
